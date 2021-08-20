@@ -1,8 +1,8 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Card } from "react-bootstrap";
 import useGetTeams from "../hooks/getTeams";
 import { useHistory } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Teams() {
   const { teams, loading } = useGetTeams();
@@ -48,11 +48,3 @@ function Teams() {
 }
 
 export default Teams;
-
-/*  <ul>
-                {team.members?.map((teamMember) => (
-                  <li key={`${teamMember.parentTeamId}${teamMember.person.id}`}>
-                    {teamMember.person.fullName}
-                  </li>
-                ))}
-              </ul>*/
