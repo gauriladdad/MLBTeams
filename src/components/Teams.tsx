@@ -9,13 +9,13 @@ function Teams() {
     "2097"
   );
 
-  const [loading, setLoading] = useState(false);
-
   let hasMoreData = true;
   const loadMoreNumbers = () => {
-    // setLoading(true);
     console.log("fetching");
   };
+
+  const loading = teamsLoading || teamMembersLoading;
+
   return (
     <InfiniteScroll
       hasMoreData={hasMoreData}
@@ -23,7 +23,7 @@ function Teams() {
       onBottomHit={loadMoreNumbers}
       loadOnMount={true}
     >
-      {teamsLoading && <div>"Teams Loading..."</div>}
+      {loading && <div>"Loading..."</div>}
       <ol style={{ height: window.innerHeight }}>
         {teams.map((team, i) => (
           <li key={`${team.id}${team.teamCode}`}>

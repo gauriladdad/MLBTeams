@@ -8,15 +8,13 @@ const useGetTeamMembers = (teamId) => {
   const fetchData = async () => {
     try {
       console.log("team members fetching");
-      await setLoading(false);
+      await setLoading(true);
       const response = await fetch(
         `https://statsapi.mlb.com/api/v1/teams/${teamId}/roster?rosterType=active`
       );
-      console.log("team members fetching 2");
       const data = await response.json();
       await setTeamMembers(data.roster);
-      //await setTeamMembers(data.data.roster);
-      await setLoading(true);
+      await setLoading(false);
     } catch (error) {
       setError("There was an error while getting team members");
     }
