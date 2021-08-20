@@ -7,21 +7,24 @@ const useGetTeamMembers = (teamId) => {
 
   const fetchData = async () => {
     try {
-      setLoading(false);
+      console.log("team members fetching");
+      await setLoading(false);
       const response = await fetch(
-        `http://statsapi.mlb.com/api/v1/teams/${teamId}/roster?rosterType=active`
+        `https://statsapi.mlb.com/api/v1/teams/${teamId}/roster?rosterType=active`
       );
+      console.log("team members fetching 2");
       const data = await response.json();
-      setTeamMembers(data.teams);
-      setLoading(true);
+      await setTeamMembers(data.roster);
+      //await setTeamMembers(data.data.roster);
+      await setLoading(true);
     } catch (error) {
-      setError("There was an error while getting teams");
+      setError("There was an error while getting team members");
     }
   };
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   return { loading, error, teamMembers };
 };

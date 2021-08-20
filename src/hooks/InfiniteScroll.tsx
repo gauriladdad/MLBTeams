@@ -8,18 +8,10 @@ type InfiniteScrollProps = {
 };
 
 function isBottom(ref: React.RefObject<HTMLDivElement>) {
-  console.log("ref.current", ref.current);
   if (!ref.current) {
     return false;
   }
-  console.log("window.innerHeight", window.innerHeight);
-  console.log(
-    "ref.current.getBoundingClientRect().bottom",
-    ref.current.getBoundingClientRect().bottom
-  );
-  const a = ref.current.getBoundingClientRect().bottom <= window.innerHeight;
-  console.log("a: ", a);
-  return a;
+  return ref.current.getBoundingClientRect().bottom <= window.innerHeight;
 }
 
 const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
@@ -41,10 +33,6 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
 
   useEffect(() => {
     const onScroll = () => {
-      console.log("isLoading", isLoading);
-      console.log("hasMoreData", hasMoreData);
-      console.log("isBottom(contentRef)", isBottom(contentRef));
-
       if (!isLoading && hasMoreData && isBottom(contentRef)) {
         onBottomHit();
       }
