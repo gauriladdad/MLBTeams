@@ -12,7 +12,7 @@ const useGetTeamMembers = (teamId) => {
         `https://statsapi.mlb.com/api/v1/teams/${teamId}/roster?rosterType=active`
       );
       const data = await response.json();
-      await setTeamMembers(data.roster);
+      await setTeamMembers(data.roster || []);
       await setLoading(false);
     } catch (error) {
       setError("There was an error while getting team members");

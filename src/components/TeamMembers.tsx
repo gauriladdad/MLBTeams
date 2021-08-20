@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import useGetTeamMembers from "../hooks/getTeamMembers";
-import { Table, ListGroup, Card } from "react-bootstrap";
+import { ListGroup, Card } from "react-bootstrap";
 
 function TeamMembers() {
   let { id } = useParams();
@@ -22,39 +22,27 @@ function TeamMembers() {
   }
 
   return (
-    <>
-      <div>
-        <ul>
-          {Object.keys(groupByPosition).map(function (keyName, keyIndex) {
-            return (
-              <Card>
-                <Card.Header className={`text-center border-0`}>
-                  {`${keyName}s`}
-                </Card.Header>
-                <Card.Body>
-                  {groupByPosition[keyName].map((positionHolder, i) => (
-                    <ListGroup key={`${positionHolder.teamMember.person.id}`}>
-                      <ListGroup.Item>
-                        {`${positionHolder.teamMember.jerseyNumber}  ${positionHolder.teamMember.person.fullName}`}
-                      </ListGroup.Item>
-                    </ListGroup>
-                  ))}
-                </Card.Body>
-              </Card>
-            );
-          })}
-        </ul>
-      </div>
-    </>
+    <ul>
+      {Object.keys(groupByPosition).map(function (keyName, keyIndex) {
+        return (
+          <Card key={`${keyName}`}>
+            <Card.Header className={`text-center border-0`}>
+              {`${keyName}s`}
+            </Card.Header>
+            <Card.Body>
+              {groupByPosition[keyName].map((positionHolder, i) => (
+                <ListGroup key={`${i}${positionHolder.teamMember.person.id}`}>
+                  <ListGroup.Item>
+                    {`${positionHolder.teamMember.jerseyNumber}  ${positionHolder.teamMember.person.fullName}`}
+                  </ListGroup.Item>
+                </ListGroup>
+              ))}
+            </Card.Body>
+          </Card>
+        );
+      })}
+    </ul>
   );
 }
 
 export default TeamMembers;
-
-/*  <ul>
-                {team.members?.map((teamMember) => (
-                  <li key={`${teamMember.parentTeamId}${teamMember.person.id}`}>
-                    {teamMember.person.fullName}
-                  </li>
-                ))}
-              </ul>*/
