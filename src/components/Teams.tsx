@@ -1,21 +1,17 @@
-import React, { useReducer } from "react";
-import useGetTeams from "../hooks/getTeams";
-import teamsReducer from "../reducers/TeamsReducer";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import useGetTeams from "../hooks/getTeams";
 
 function Teams() {
-  const [state, dispatch] = useReducer(teamsReducer, []);
-  const { loading } = useGetTeams(dispatch);
-
-  const getTeamMembers = (teamId) => {};
+  const { teams, loading } = useGetTeams();
 
   if (loading) {
-    return <div>"Loading..."</div>;
+    return <div>Loading...</div>;
   }
-
   return (
-    <Table hover variant="dark">
+    <Table hover variant="light">
       <thead>
         <tr>
           <th></th>
@@ -24,19 +20,11 @@ function Teams() {
         </tr>
       </thead>
       <tbody>
-        {state.map((team, i) => (
-          <tr>
+        {teams.map((team, i) => (
+          <tr key={`${team.name}${team.id}`}>
             <td className={`align-items-center`}>{`${i + 1}`}</td>
             <td>
-              <Button
-                variant="link"
-                style={{ color: "#FFF", textDecoration: "none" }}
-                onClick={() => {
-                  getTeamMembers(team.id);
-                }}
-              >
-                {team.name}
-              </Button>
+              <Link to={`/teamMembers/${team.id}`}>{team.name}</Link>
             </td>
             <td>{team.league.name}</td>
           </tr>
