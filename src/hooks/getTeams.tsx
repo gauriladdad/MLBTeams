@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useGetTeams = () => {
+const useGetTeams = (dispatch) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [teams, setTeams] = useState([]);
@@ -12,6 +12,7 @@ const useGetTeams = () => {
         `https://statsapi.mlb.com/api/v1/teams?season=2021&amp;sportId=1`
       );
       const data = await response.json();
+      dispatch({ type: "get_teams_data", payload: data.teams });
       setTeams(data.teams);
       setLoading(false);
     } catch (error) {
