@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react";
 
-const useGetTeams = (dispatch) => {
+const useGetTeams = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [teams, setTeams] = useState([]);
 
   const fetchData = async () => {
     try {
-      setLoading(true);
+      await setLoading(true);
       const response = await fetch(
         `https://statsapi.mlb.com/api/v1/teams?season=2021&amp;sportId=1`
       );
       const data = await response.json();
-      dispatch({ type: "get_teams_data", payload: data.teams });
-      setTeams(data.teams);
-      setLoading(false);
+      await setTeams(data.teams);
+      await setLoading(false);
     } catch (error) {
-      setError("There was an error while getting teams");
+      await setError("There was an error while getting teams");
     }
   };
 
