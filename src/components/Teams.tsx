@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Card } from "react-bootstrap";
 import useGetTeams from "../hooks/getTeams";
 import { useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Teams() {
-  const { teams, loading } = useGetTeams();
+  const { data, loading } = useGetTeams();
   const history = useHistory();
+  const [teams, setTeams] = useState([]);
+
+  useEffect(() => {
+    setTeams([...data]);
+  }, [data]);
 
   const displayTeamMembers = (team) => {
     history.push(`/teamMembers/${team.id}`);
