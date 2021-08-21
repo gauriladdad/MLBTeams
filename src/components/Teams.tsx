@@ -59,6 +59,9 @@ function Teams() {
               <th className={styles.headerColor} colSpan={2} rowSpan={2}>
                 TEAM
               </th>
+              <th className={styles.headerColor} rowSpan={2}>
+                CLUB
+              </th>
               <th className={styles.headerColor} colSpan={2}>
                 DIVISION
               </th>
@@ -76,6 +79,7 @@ function Teams() {
               >
                 <td className={`align-items-center`}>{`${i + 1}`}</td>
                 <td>{team.name}</td>
+                <td>{team.clubName}</td>
                 <td>{team.league.name}</td>
                 <td>{team.division?.name}</td>
               </tr>
