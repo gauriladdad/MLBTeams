@@ -24,9 +24,8 @@ function TeamMembers() {
     return (
       <Card className="mx-5 my-5" key={"empty"}>
         <Card.Header className={`text-center border-0`}>
-          Team under formation!!!
+          Wanna Join?
         </Card.Header>
-
         <Card.Body>
           We are busy getting the best players, please visit later.
         </Card.Body>
